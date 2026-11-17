@@ -26,6 +26,8 @@ setTimeout(function(){var l=document.getElementById('loader');if(l)l.remove();},
   --ff:'Manrope',system-ui,-apple-system,Segoe UI,sans-serif;
 }
 html{scroll-behavior:smooth}
+/* com GSAP/Lenis ativos o smooth nativo atrapalha as medições do ScrollTrigger.refresh() */
+html.gsap-on,html.lenis{scroll-behavior:auto!important}
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
@@ -207,7 +209,7 @@ em .w{padding-right:.08em;margin-right:-.08em}
 .cats-foot p span{color:var(--ink2);font-weight:500}
 
 /* ambientes */
-#ambientes{padding:120px 0;overflow:hidden}
+#ambientes{padding:120px 0;overflow:clip}
 .amb-track{display:flex;gap:24px;margin-top:48px;padding:0 max(24px,calc((100vw - 1240px)/2)) 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:max(24px,calc((100vw - 1240px)/2));scrollbar-width:none}
 @media (max-width:640px){.amb-track{padding-inline:16px;scroll-padding-inline:16px}}
 .amb-track::-webkit-scrollbar{display:none}
@@ -224,7 +226,8 @@ em .w{padding-right:.08em;margin-right:-.08em}
 .amb.cta h4 em{color:var(--verde)}
 .amb-progress{height:2px;background:var(--line);margin-top:44px;position:relative;overflow:hidden;display:none}
 .amb-progress i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
-#ambientes.is-pinned{height:100vh;padding:96px 0 40px;display:flex;flex-direction:column;justify-content:center}
+#ambientes.is-pinned{padding:0}
+.is-pinned .amb-sticky{position:sticky;top:0;height:100vh;padding:96px 0 40px;display:flex;flex-direction:column;justify-content:center;overflow:clip}
 .is-pinned .amb-track{overflow:visible;width:max-content;scroll-snap-type:none}
 .is-pinned .amb-img img{width:118%;max-width:none;margin-left:-9%}
 .is-pinned .amb-progress{display:block}
@@ -261,8 +264,8 @@ html:not(.gsap-on) .step-ic,.step.on .step-ic{background:var(--verde);color:var(
 /* promos */
 #promocoes{padding:130px 0}
 .promos{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:20px}
-.promo{border-radius:var(--r);padding:34px;background:#fff;border:1px solid var(--line);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
-.promo:hover{transform:translateY(-6px);box-shadow:0 30px 60px -30px rgba(27,29,24,.35)}
+.promo{border-radius:var(--r);padding:34px;background:#fff;border:1px solid var(--line);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:translate .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s}
+.promo:hover{translate:0 -6px;box-shadow:0 30px 60px -30px rgba(27,29,24,.35)}
 .promo-ic{width:52px;height:52px;border-radius:14px;background:var(--verde-l);color:var(--verde-d);display:grid;place-items:center;margin-bottom:24px}
 .promo-big{font-family:var(--ff-d);font-weight:400;font-size:clamp(64px,6.4vw,104px);line-height:.9;letter-spacing:-.05em}
 .promo h3{font-family:var(--ff-d);font-weight:400;font-size:28px;line-height:1.1;margin:12px 0 10px;letter-spacing:-.01em}
@@ -295,8 +298,8 @@ html:not(.gsap-on) .step-ic,.step.on .step-ic{background:var(--verde);color:var(
 .ig-f{font-size:13px;color:var(--ink2)}
 .ig-card .btn{height:46px;padding:0 20px;font-size:14px}
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-.reel{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff;transition:transform .4s,box-shadow .4s}
-.reel:hover{transform:translateY(-5px);box-shadow:0 24px 50px -28px rgba(27,29,24,.35)}
+.reel{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff;transition:translate .4s,box-shadow .4s}
+.reel:hover{translate:0 -5px;box-shadow:0 24px 50px -28px rgba(27,29,24,.35)}
 .reel .instagram-media{width:100%!important;min-width:unset!important;max-width:100%!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 .reel-ph{padding:60px 24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--ink2);font-weight:700;font-size:14px}
 .reel-ph .i{width:34px;height:34px;color:var(--verde-d)}
@@ -328,8 +331,8 @@ html:not(.gsap-on) .step-ic,.step.on .step-ic{background:var(--verde);color:var(
 .team-head h3{font-family:var(--ff-d);font-weight:400;font-size:clamp(28px,3vw,40px);letter-spacing:-.02em}
 .team-head p{color:var(--ink2)}
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.member{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;align-items:center;gap:18px;transition:transform .4s,box-shadow .4s,border-color .4s}
-.member:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(27,29,24,.35);border-color:rgba(141,198,63,.5)}
+.member{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;align-items:center;gap:18px;transition:translate .4s,box-shadow .4s,border-color .4s}
+.member:hover{translate:0 -4px;box-shadow:0 24px 50px -30px rgba(27,29,24,.35);border-color:rgba(141,198,63,.5)}
 .av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--verde),var(--verde-d));color:#fff;display:grid;place-items:center;font-family:var(--ff-d);font-size:24px;flex-shrink:0}
 .m-name{font-weight:800}
 .m-role{font-size:13px;color:var(--verde-d);font-weight:700}
@@ -376,8 +379,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
 .ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:40px}
 .ft-desc{margin:20px 0 24px;max-width:300px;font-size:15px}
 .socials{display:flex;gap:10px}
-.socials a{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;color:#fff;transition:background .25s,border-color .25s,color .25s,transform .25s}
-.socials a:hover{background:var(--verde);border-color:var(--verde);color:var(--ink);transform:translateY(-3px)}
+.socials a{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:grid;place-items:center;color:#fff;transition:background .25s,border-color .25s,color .25s,translate .25s}
+.socials a:hover{background:var(--verde);border-color:var(--verde);color:var(--ink);translate:0 -3px}
 .ft-col h4{color:#fff;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
 .ft-col a,.ft-col p{display:block;padding:5px 0;font-size:15px;transition:color .2s}
 .ft-col a:hover{color:var(--verde)}
@@ -654,6 +657,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
 
 <!-- AMBIENTES -->
 <section id="ambientes">
+ <div class="amb-sticky">
   <div class="container">
     <div class="sec-head" style="margin-bottom:0">
       <div>
@@ -673,6 +677,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
     <article class="amb cta"><div class="amb-img"><h4>Seu ambiente pode ser <em>o próximo.</em></h4><a class="btn btn-green" data-wa="Olá! Vim pelo site da Look Design e quero montar um ambiente. Podem me ajudar?"><svg class="i f"><use href="#i-wa"/></svg>Começar meu projeto</a></div><div class="amb-cap"><h4>&nbsp;</h4><span>07</span></div></article>
   </div>
   <div class="container"><div class="amb-progress"><i></i></div></div>
+ </div>
 </section>
 
 <!-- FABRICA -->
@@ -1004,6 +1009,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
   if(!window.gsap||!window.ScrollTrigger||reduce){ if(loader) loader.remove(); return; }
 
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ignoreMobileResize:true});
   document.documentElement.classList.add('gsap-on');
 
   if(window.Lenis){
@@ -1032,20 +1038,25 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
     return el.querySelectorAll('.wi');
   }
 
-  /* --- pinned horizontal gallery (created first so later triggers account for pin spacing) --- */
+  /* --- galeria horizontal: CSS sticky (o navegador segura a seção) + scrub do GSAP.
+     Sem pin do ScrollTrigger -> não tem pin-spacer para dessincronizar ao subir. --- */
   var mm=gsap.matchMedia();
   mm.add('(min-width:1025px)',function(){
     var sec=document.getElementById('ambientes'), tr=sec.querySelector('.amb-track'), bar=sec.querySelector('.amb-progress i');
     sec.classList.add('is-pinned');
     function dist(){ return Math.max(0,tr.scrollWidth-document.documentElement.clientWidth); }
-    var tw=gsap.to(tr,{x:function(){return -dist();},ease:'none',scrollTrigger:{
-      trigger:sec,start:'top top',end:function(){return '+='+dist();},pin:true,scrub:1,invalidateOnRefresh:true,anticipatePin:1,
+    function size(){ sec.style.height=(window.innerHeight+dist())+'px'; }
+    size();
+    /* fromTo com x:0 explícito: num refresh o início nunca é regravado como 'já no fim' */
+    var tw=gsap.fromTo(tr,{x:0},{x:function(){return -dist();},ease:'none',immediateRender:false,scrollTrigger:{
+      trigger:sec,start:'top top',end:'bottom bottom',scrub:1,invalidateOnRefresh:true,
+      onRefreshInit:size,
       onUpdate:function(s){ gsap.set(bar,{scaleX:s.progress}); }
     }});
     tr.querySelectorAll('.amb-img img').forEach(function(img){
       gsap.fromTo(img,{xPercent:-7},{xPercent:7,ease:'none',scrollTrigger:{trigger:img.closest('.amb'),containerAnimation:tw,start:'left right',end:'right left',scrub:true}});
     });
-    return function(){ sec.classList.remove('is-pinned'); };
+    return function(){ sec.classList.remove('is-pinned'); sec.style.height=''; gsap.set(tr,{clearProps:'transform'}); };
   });
 
   /* --- hero intro --- */
@@ -1095,24 +1106,37 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
   }});
   gsap.fromTo('.band',{rotate:-1.6},{rotate:1.6,ease:'none',scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:true}});
 
+  /* Reveal helper: elementos aparecem UMA vez e nunca mais somem.
+     - usa set()+to() em vez de from() (from() pode "gravar" o estado escondido como final num refresh)
+     - once:true -> não reverte ao subir
+     - clearProps no fim -> nenhum estilo inline fica preso no elemento */
+  function reveal(targets,fromVars,toVars,start){
+    var els=gsap.utils.toArray(targets); if(!els.length) return;
+    gsap.set(els,fromVars);
+    ScrollTrigger.batch(els,{start:start||'top 90%',once:true,onEnter:function(b){
+      gsap.to(b,Object.assign({overwrite:'auto',stagger:.1,clearProps:'transform,opacity,visibility'},toVars));
+    }});
+  }
+
   /* section titles: word reveal */
   document.querySelectorAll('.h2').forEach(function(h){
     var w=splitWords(h);
-    gsap.from(w,{yPercent:115,duration:1.05,stagger:.05,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 86%'}});
+    gsap.set(w,{yPercent:115});
+    ScrollTrigger.create({trigger:h,start:'top 86%',once:true,onEnter:function(){
+      gsap.to(w,{yPercent:0,duration:1.05,stagger:.05,ease:'power4.out',overwrite:'auto',clearProps:'transform'});
+    }});
   });
 
   /* simple reveals */
-  gsap.utils.toArray('.rv').forEach(function(el){
-    gsap.from(el,{y:36,autoAlpha:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
-  });
-  gsap.set('.rb',{y:50,autoAlpha:0});
-  ScrollTrigger.batch('.rb',{start:'top 92%',once:true,onEnter:function(b){
-    gsap.to(b,{y:0,autoAlpha:1,duration:1,ease:'power3.out',stagger:.1});
-  }});
+  reveal('.rv',{y:36,autoAlpha:0},{y:0,autoAlpha:1,duration:1,ease:'power3.out',stagger:.08},'top 90%');
+  reveal('.rb',{y:50,autoAlpha:0},{y:0,autoAlpha:1,duration:1,ease:'power3.out'},'top 92%');
 
-  /* statement scrub */
+  /* statement: acende palavra por palavra, uma vez */
   var sw=splitWords(document.getElementById('statement'));
-  gsap.fromTo(sw,{opacity:.14},{opacity:1,stagger:.05,ease:'none',scrollTrigger:{trigger:'#statement',start:'top 80%',end:'bottom 45%',scrub:true}});
+  gsap.set(sw,{opacity:.14});
+  ScrollTrigger.create({trigger:'#statement',start:'top 75%',once:true,onEnter:function(){
+    gsap.to(sw,{opacity:1,duration:.6,stagger:.035,ease:'power1.out',clearProps:'opacity'});
+  }});
 
   /* counters */
   document.querySelectorAll('.count').forEach(function(el){
@@ -1128,21 +1152,35 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
   gsap.set('.cat',{clipPath:'inset(14% 14% 14% 14% round 20px)',autoAlpha:0});
   gsap.set('.cat img',{scale:1.35});
   ScrollTrigger.batch('.cat',{start:'top 90%',once:true,onEnter:function(b){
-    gsap.to(b,{clipPath:'inset(0% 0% 0% 0% round 20px)',autoAlpha:1,duration:1.3,ease:'expo.out',stagger:.12});
+    gsap.to(b,{clipPath:'inset(0% 0% 0% 0% round 20px)',autoAlpha:1,duration:1.3,ease:'expo.out',stagger:.12,overwrite:'auto',clearProps:'clipPath,opacity,visibility'});
     gsap.to(b.map(function(c){return c.querySelector('img');}),{scale:1,duration:1.7,ease:'expo.out',stagger:.12,clearProps:'transform'});
   }});
 
   /* factory */
-  gsap.from('.fab-media',{clipPath:'inset(12% 12% 12% 12% round 24px)',duration:1.5,ease:'expo.out',scrollTrigger:{trigger:'.fab-media',start:'top 85%'}});
-  gsap.from('.fab-media img',{scale:1.3,duration:1.8,ease:'expo.out',scrollTrigger:{trigger:'.fab-media',start:'top 85%'}});
-  gsap.fromTo('.steps-fill',{scaleY:0},{scaleY:1,ease:'none',scrollTrigger:{trigger:'.steps',start:'top 65%',end:'bottom 65%',scrub:true}});
+  var fm=document.querySelector('.fab-media'), fmi=fm.querySelector('img');
+  gsap.set(fm,{clipPath:'inset(12% 12% 12% 12% round 24px)'});
+  gsap.set(fmi,{scale:1.3});
+  ScrollTrigger.create({trigger:fm,start:'top 85%',once:true,onEnter:function(){
+    gsap.to(fm,{clipPath:'inset(0% 0% 0% 0% round 24px)',duration:1.5,ease:'expo.out',clearProps:'clipPath'});
+    gsap.to(fmi,{scale:1,duration:1.8,ease:'expo.out',clearProps:'transform'});
+  }});
+  /* linha de progresso: só avança, nunca recolhe ao subir */
+  var fill=document.querySelector('.steps-fill'), maxP=0;
+  gsap.set(fill,{scaleY:0});
+  ScrollTrigger.create({trigger:'.steps',start:'top 65%',end:'bottom 65%',onUpdate:function(s){
+    if(s.progress>maxP){ maxP=s.progress; gsap.set(fill,{scaleY:maxP}); }
+  }});
   document.querySelectorAll('.step').forEach(function(s){
-    ScrollTrigger.create({trigger:s,start:'top 66%',onEnter:function(){s.classList.add('on');},onLeaveBack:function(){s.classList.remove('on');}});
-    gsap.from(s,{x:30,autoAlpha:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:s,start:'top 88%'}});
+    ScrollTrigger.create({trigger:s,start:'top 66%',once:true,onEnter:function(){s.classList.add('on');}});
   });
+  reveal('.step',{x:30,autoAlpha:0},{x:0,autoAlpha:1,duration:.9,ease:'power3.out'},'top 88%');
 
   /* footer word */
-  gsap.from('.ft-word',{yPercent:60,autoAlpha:0,ease:'none',scrollTrigger:{trigger:'footer',start:'top 85%',end:'bottom bottom',scrub:true}});
+  var fw=document.querySelector('.ft-word');
+  gsap.set(fw,{yPercent:60,autoAlpha:0});
+  ScrollTrigger.create({trigger:fw,start:'top 95%',once:true,onEnter:function(){
+    gsap.to(fw,{yPercent:0,autoAlpha:1,duration:1.4,ease:'power3.out',clearProps:'transform,opacity,visibility'});
+  }});
 
   /* magnetic buttons */
   if(fine){
