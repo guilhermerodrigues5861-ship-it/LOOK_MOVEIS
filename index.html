@@ -1097,9 +1097,9 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
 
   /* section titles: word reveal */
   document.querySelectorAll('.h2').forEach(function(h){
-    var w=splitWords(h);
-    gsap.from(w,{yPercent:115,duration:1.05,stagger:.05,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 86%'}});
-  });
+  var w=splitWords(h);
+  gsap.from(w,{yPercent:115,duration:1.05,stagger:.05,ease:'power4.out',scrollTrigger:{trigger:h,start:'top 86%',once:true}});
+});
 
   /* simple reveals */
   gsap.utils.toArray('.rv').forEach(function(el){
