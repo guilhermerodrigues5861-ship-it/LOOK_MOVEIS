@@ -1103,8 +1103,8 @@ footer{background:var(--dark);color:rgba(255,255,255,.68);padding:90px 0 30px;ov
 
   /* simple reveals */
   gsap.utils.toArray('.rv').forEach(function(el){
-    gsap.from(el,{y:36,autoAlpha:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}});
-  });
+  gsap.from(el,{y:36,autoAlpha:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
+});
   gsap.set('.rb',{y:50,autoAlpha:0});
   ScrollTrigger.batch('.rb',{start:'top 92%',once:true,onEnter:function(b){
     gsap.to(b,{y:0,autoAlpha:1,duration:1,ease:'power3.out',stagger:.1});
